@@ -42,8 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 //Slider component
 const Slider = ({ handleReveal, show, data, icon }) => 
-    <IconButton 
-        disabled={(data === undefined || data.length < 1) ? true : false} 
+    <IconButton
         size="small"
         onClick={handleReveal}
     >
@@ -59,6 +58,7 @@ const Slider = ({ handleReveal, show, data, icon }) =>
             </Typography>
         </Slide>
     </IconButton> 
+
 
 //AgentListing component
 const AgentListing = ({ agent }) => {
@@ -98,18 +98,25 @@ const AgentListing = ({ agent }) => {
                     secondary={agent.code}
                 />
                 <ListSecondaryAction>
-                    <Slider 
-                        icon={<Phone />} 
-                        data={agent.phone} 
-                        show={showPhone}
-                        handleReveal={handlePhoneReveal}
-                    />
-                    <Slider  
-                        icon={<Email />} 
-                        data={agent.email}
-                        show={showEmail}
-                        handleReveal={handleEmailReveal}
-                    />
+                    {   (agent.phone === undefined || agent.phone.length < 1)
+                        ?   ''
+                        :   <Slider 
+                                icon={<Phone />} 
+                                data={agent.phone} 
+                                show={showPhone}
+                                handleReveal={handlePhoneReveal}
+                            />
+                    }
+                    {
+                        (agent.email === undefined || agent.email.length < 1)
+                        ?   ''
+                        :   <Slider  
+                                icon={<Email />} 
+                                data={agent.email}
+                                show={showEmail}
+                                handleReveal={handleEmailReveal}
+                            />
+                    }
                 </ListSecondaryAction>
             </ListItem>
         </Card>
