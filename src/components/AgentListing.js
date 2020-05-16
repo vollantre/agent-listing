@@ -55,13 +55,13 @@ const AgentListing = ({ agent, size }) => {
                 <ListSecondaryAction>
                     <Slider 
                         icon={<Phone />} 
-                        data={agent.phone} 
+                        dataInfo={agent.phone} 
                         show={showPhone}
                         handleReveal={handlePhoneReveal}
                     />
                     <Slider  
                         icon={<Email />} 
-                        data={agent.email}
+                        dataInfo={agent.email}
                         show={showEmail}
                         handleReveal={handleEmailReveal}
                     />

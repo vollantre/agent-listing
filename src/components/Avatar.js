@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import MuiBadge from '@material-ui/core/Badge'
 import MuiAvatar from '@material-ui/core/Avatar'
@@ -34,6 +35,13 @@ const Avatar = ({ children, backgroundColor, badgeContent }) =>  {
             </Badge>
         </ListItemAvatar>
     )
+}
+
+Avatar.propTypes = {
+    children: PropTypes.node,
+    backGroundColor: PropTypes.string,
+    badgeContent: PropTypes.string,
+    size: PropTypes.string
 }
 
 export default Avatar
