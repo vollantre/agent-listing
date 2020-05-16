@@ -12,6 +12,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import MuiListSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import { Typography } from '@material-ui/core';
 
 //Add style
 const Badge = withStyles(theme => ({
@@ -39,26 +40,41 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-//Reveal component
-const Reveal = ({ label, data, show }) =>
-    <Slide
-        mountOnEnter
-        unmountOnExit
-        in={show}
-        direction="left"
+//Slider component
+const Slider = ({ handleReveal, show, data, icon }) => 
+    <IconButton 
+        disabled={(data === undefined || data.length < 1) ? true : false} 
+        size="small"
+        onClick={handleReveal}
     >
-        <ListItem>
-            <ListItemText>
-                <strong>{label}:</strong> {data}
-            </ListItemText>
-        </ListItem>
-    </Slide>
+        {icon}
+        <Slide
+            mountOnEnter
+            unmountOnExit
+            in={show}
+            direction="left"
+        >
+            <Typography variant="subtitle1">
+                {data}
+            </Typography>
+        </Slide>
+    </IconButton> 
 
 //AgentListing component
 const AgentListing = ({ agent }) => {
     const [showPhone, setShowPhone] = React.useState(false)
     const [showEmail, setShowEmail] = React.useState(false)
     const classes = useStyles()
+
+    const handlePhoneReveal = () => {
+        showEmail && setShowEmail(false)
+        setShowPhone(prev => !prev)
+    }
+
+    const handleEmailReveal = () => {
+        showPhone && setShowPhone(false)
+        setShowEmail(prev => !prev)
+    }
 
     return (
         <Card variant="outlined" >
@@ -82,24 +98,20 @@ const AgentListing = ({ agent }) => {
                     secondary={agent.code}
                 />
                 <ListSecondaryAction>
-                    <IconButton 
-                        disabled={(agent.phone === undefined || agent.phone.length < 1) ? true : false} 
-                        size="small"
-                        onClick={() => setShowPhone(prev => !prev)}
-                    >
-                        <Phone />
-                    </IconButton>
-                    <IconButton 
-                        disabled={(agent.email === undefined || agent.email.length < 1) ? true : false}
-                        size="small"
-                        onClick={() => setShowEmail(prev => !prev)}
-                    >
-                        <Email />
-                    </IconButton>
+                    <Slider 
+                        icon={<Phone />} 
+                        data={agent.phone} 
+                        show={showPhone}
+                        handleReveal={handlePhoneReveal}
+                    />
+                    <Slider  
+                        icon={<Email />} 
+                        data={agent.email}
+                        show={showEmail}
+                        handleReveal={handleEmailReveal}
+                    />
                 </ListSecondaryAction>
             </ListItem>
-            <Reveal label="Phone" data={agent.phone} show={showPhone} />
-            <Reveal label="Email" data={agent.email} show={showEmail} />
         </Card>
     )
 }

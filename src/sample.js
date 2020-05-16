@@ -1,6 +1,6 @@
 export default {
     name: 'Carole Marvin',
     code: '05TYX',
-    phone: '123456789',
+    phone: '(805) 334 4432',
     email: 'example@mail.com',
 }
