@@ -18,7 +18,7 @@ const App = () => {
 
     return(
         <List className={classes.root}>
-            <AgentListing agent={mockObj} />
+            <AgentListing size="small" agent={mockObj} />
         </List>
     )
 }
