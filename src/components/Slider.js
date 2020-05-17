@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core'
 
 //Slider component
 const Slider = ({ handleReveal, show, dataInfo, icon }) => {
-    if(dataInfo === undefined || data.length < 1) return null
+    if(dataInfo === undefined || dataInfo.length < 1) return null
 
     return(
         <IconButton

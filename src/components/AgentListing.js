@@ -4,11 +4,19 @@ import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import Phone from '@material-ui/icons/Phone'
 import Email from '@material-ui/icons/Email'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
+import MuiListItem from '@material-ui/core/ListItem'
+import MuiListItemText from '@material-ui/core/ListItemText'
 import MuiListSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import Slider from './Slider'
 import Avatar from './Avatar'
+
+//STYLING
+const ListItemText = withStyles(theme => ({
+    root: {
+        marginTop: 0,
+        marginBottom: 0
+    }
+}))(MuiListItemText)
 
 const ListSecondaryAction = withStyles(theme => ({
     root: {
@@ -16,6 +24,60 @@ const ListSecondaryAction = withStyles(theme => ({
         right: '5px'
     }
 }))(MuiListSecondaryAction)
+
+const ListItem = withStyles(theme => ({
+    root: {
+        paddingTop: 0,
+        paddingBottom: 0,
+        paddingLeft: '2px'
+    }
+}))(MuiListItem)
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////                                            REACT COMPONENTS                                                   /////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//SmallAgentListing component
+const SmallAgentListing = ({ agent }) => 
+    <Card variant="outlined">
+        <ListItem>
+            <Avatar size='small' backgroundColor={agent.color}>
+                {agent.name[0]}
+            </Avatar>
+            <ListItemText
+                primary={<strong>{agent.name}</strong>}
+            />
+        </ListItem>
+    </Card>
+
+//MediumAgentListing component
+const MediumAgentListing = ({ agent, showEmail, showPhone, handleEmailReveal, handlePhoneReveal }) => 
+    <Card variant="outlined" >
+        <ListItem>
+            <Avatar backgroundColor={agent.color} badgeContent='TA'>
+                {agent.name[0]}
+            </Avatar>
+            <MuiListItemText    
+                primary={<strong>{agent.name}</strong>}
+                secondary={agent.code}
+            />
+            <ListSecondaryAction>
+                <Slider 
+                    icon={<Phone />} 
+                    dataInfo={agent.phone} 
+                    show={showPhone}
+                    handleReveal={handlePhoneReveal}
+                />
+                <Slider  
+                    icon={<Email />} 
+                    dataInfo={agent.email}
+                    show={showEmail}
+                    handleReveal={handleEmailReveal}
+                />
+            </ListSecondaryAction>
+        </ListItem>
+    </Card>
 
 //AgentListing component
 const AgentListing = ({ agent, size }) => {
@@ -32,43 +94,15 @@ const AgentListing = ({ agent, size }) => {
         setShowEmail(prev => !prev)
     }
 
-    if(size === 'small') return (
-        <Card variant="outlined">
-            <ListItem>
-                <Avatar>
+    if(size === 'small') return <SmallAgentListing agent={agent} />
 
-                </Avatar>
-            </ListItem>
-        </Card>
-    )
-
-    return (
-    <Card variant="outlined" >
-            <ListItem alignItems="flex-start">
-                <Avatar backgroundColor={agent.color} badgeContent='TA'>
-                    {agent.name[1]}
-                </Avatar>
-                <ListItemText
-                    primary={<strong>{agent.name}</strong>}
-                    secondary={agent.code}
-                />
-                <ListSecondaryAction>
-                    <Slider 
-                        icon={<Phone />} 
-                        dataInfo={agent.phone} 
-                        show={showPhone}
-                        handleReveal={handlePhoneReveal}
-                    />
-                    <Slider  
-                        icon={<Email />} 
-                        dataInfo={agent.email}
-                        show={showEmail}
-                        handleReveal={handleEmailReveal}
-                    />
-                </ListSecondaryAction>
-            </ListItem>
-        </Card>
-    )
+    return <MediumAgentListing 
+                showEmail={showEmail}
+                showPhone={showPhone}
+                handleEmailReveal={handleEmailReveal}
+                handlePhoneReveal={handlePhoneReveal}
+                agent={agent}
+            />
 }
 
 AgentListing.propTypes = {
