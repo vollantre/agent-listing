@@ -40,7 +40,7 @@ const Avatar = (props) =>  {
 
     if(size && size === 'small') return (
         <ListItemAvatar>
-            <MuiAvatar className={classes.small}>
+            <MuiAvatar style={{ backgroundColor }} className={classes.small}>
                 {children}
             </MuiAvatar>
         </ListItemAvatar>
