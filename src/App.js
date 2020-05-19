@@ -37,6 +37,13 @@ const App = () => {
     return(
         <MuiThemeProvider theme={theme}>
             <Typography variant="h5">
+                Daily Agenda
+            </Typography>
+            <DailyAgenda 
+                title="Team Agenda"
+                agents={[mockObj]}
+            />
+            <Typography style={{ marginTop: '20px' }} variant="h5">
                Medium AgentListing 
             </Typography>
             <List className={classes.root}>
@@ -48,12 +55,6 @@ const App = () => {
             <List  className={classes.small}>
                 <AgentListing size="small" agent={mockObj} />
             </List>
-            <Typography variant="h5">
-                Daily Agenda
-            </Typography>
-            <DailyAgenda 
-                title="Team Agenda"
-            />
         </MuiThemeProvider>
     )
 }

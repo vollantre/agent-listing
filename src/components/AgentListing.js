@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
+import MuiCard from '@material-ui/core/Card'
 import Phone from '@material-ui/icons/Phone'
 import Email from '@material-ui/icons/Email'
 import MuiListItem from '@material-ui/core/ListItem'
@@ -11,12 +11,20 @@ import Slider from './Slider'
 import Avatar from './Avatar'
 
 //STYLING
-const ListItemText = withStyles(theme => ({
+const SmallListItemText = withStyles(theme => ({
     root: {
         marginTop: 0,
-        marginBottom: 0
+        marginBottom: 0,
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(3)
     }
 }))(MuiListItemText)
+
+const Card = withStyles(theme => ({
+    root: {
+        overflow: 'unset'
+    }
+}))(MuiCard)
 
 const ListSecondaryAction = withStyles(theme => ({
     root: {
@@ -40,16 +48,16 @@ const ListItem = withStyles(theme => ({
 
 //SmallAgentListing component
 const SmallAgentListing = ({ agent }) => 
-    <Card variant="outlined">
-        <ListItem>
+    
+        <Card variant="outlined"><ListItem>
             <Avatar size='small' backgroundColor={agent.color}>
                 {agent.name[0]}
             </Avatar>
-            <ListItemText
+            <SmallListItemText
                 primary={<strong>{agent.name}</strong>}
             />
-        </ListItem>
-    </Card>
+        </ListItem></Card>
+    
 
 //MediumAgentListing component
 const MediumAgentListing = ({ agent, showEmail, showPhone, handleEmailReveal, handlePhoneReveal }) => 

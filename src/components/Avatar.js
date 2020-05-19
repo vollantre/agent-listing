@@ -27,11 +27,18 @@ const ListItemAvatar = withStyles(theme => ({
 const styles = theme => ({
     small: {
         width: theme.spacing(3),
-        height: theme.spacing(3)
+        height: theme.spacing(3),
+        position: 'absolute',
+        marginLeft: '-9px',
+        border: '2px solid white',
+        borderRadius: '50%',
+        top: '-2px'
     },
     large: {
         width: theme.spacing(6),
-        height: theme.spacing(6)
+        height: theme.spacing(6),
+        border: '2px solid white',
+        borderRadius: '50%'
     }
 })
 
