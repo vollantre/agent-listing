@@ -31,7 +31,7 @@ const theme = createMuiTheme({
 })
 
 const App = () => {
-    const [mockObj] = useState(sample)
+    const [mockArray] = useState(sample)
     const classes = useStyles()
 
     return(
@@ -41,20 +41,15 @@ const App = () => {
             </Typography>
             <DailyAgenda 
                 title="Team Agenda"
-                agents={[mockObj]}
+                appointments={mockArray}
             />
             <Typography style={{ marginTop: '20px' }} variant="h5">
-               Medium AgentListing 
+                Medium AgentListing
             </Typography>
-            <List className={classes.root}>
-                <AgentListing size="medium" agent={mockObj} />
-            </List>
-            <Typography variant="h5">
-                Small AgentListing
-            </Typography>
-            <List  className={classes.small}>
-                <AgentListing size="small" agent={mockObj} />
-            </List>
+            <AgentListing
+                agent={mockArray[0].agents[0]}
+                size="medium"
+            />
         </MuiThemeProvider>
     )
 }

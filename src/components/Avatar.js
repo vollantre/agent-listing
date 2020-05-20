@@ -46,11 +46,9 @@ const Avatar = (props) =>  {
     const { children, backgroundColor, classes, badgeContent, size } = props
 
     if(size && size === 'small') return (
-        <ListItemAvatar>
             <MuiAvatar style={{ backgroundColor }} className={classes.small}>
                 {children}
             </MuiAvatar>
-        </ListItemAvatar>
     ) 
 
     return (

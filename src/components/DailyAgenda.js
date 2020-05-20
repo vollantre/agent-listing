@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import MuiPaper from '@material-ui/core/Paper'
 import List from '@material-ui/core/List'
@@ -24,7 +25,7 @@ const Paper = withStyles(theme => ({
     }
 }))(MuiPaper)
 
-const Time = ({ hour,  }) => (
+const Time = ({ hour }) => (
     <Grid item xs={12}>
         <Typography align="right" variant="body1">
             {hour.slice(0,5)} <Typography variant="caption">{hour.substr(-2)}</Typography>
@@ -51,7 +52,7 @@ const Times = () => (
     </Grid>
 )
 
-const DailyAgenda = ({ title, agents }) => {
+const DailyAgenda = ({ title, appointments }) => {
 
     return(
         <Paper elevation={3}>
@@ -61,14 +62,17 @@ const DailyAgenda = ({ title, agents }) => {
             <Grid style={{ marginTop: '20px' }} container spacing={3}>
                 <Times />
                 <Grid item xs={9}>
-                    <List style={{ width: '200px' }}>
-                        <AgentListing size="small" agent={agents[0]} />
-                    </List>
+                    <AgentListing size="small" agent={appointments[0].agents[0]} />
                 </Grid>
             </Grid>
         </Paper>
     )
     
+}
+
+DailyAgenda.propTypes = {
+    title: PropTypes.string.isRequired,
+    appointments: PropTypes.array
 }
 
 export default DailyAgenda
