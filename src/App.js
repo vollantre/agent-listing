@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles'
-import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import DailyAgenda from './components/DailyAgenda'
 import AgentListing from './components/AgentListing'
@@ -26,14 +25,22 @@ const theme = createMuiTheme({
             'sans-serif',
             '"Helvetica Neue"',
             'Arial',
-          ].join(', ')
+          ].join(', '),
+        body1: {
+            fontSize: '1.2rem',
+            color: '#3d3d3d'
+        },
+        h4: {
+            color: '#3d3d3d',
+            fontWeight: 'bold',
+            paddingTop: '12px'
+        }
     }
 })
 
 const App = () => {
     const [mockArray] = useState(sample)
-    const classes = useStyles()
-
+    
     return(
         <MuiThemeProvider theme={theme}>
             <Typography variant="h5">

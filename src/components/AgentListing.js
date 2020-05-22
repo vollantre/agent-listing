@@ -6,10 +6,8 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
 import Phone from '@material-ui/icons/Phone'
 import Email from '@material-ui/icons/Email'
+import MuiAvatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
-import MuiListItem from '@material-ui/core/ListItem'
-import MuiListItemText from '@material-ui/core/ListItemText'
-import MuiListSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import Avatar from './Avatar'
 
 //STYLING
@@ -19,40 +17,38 @@ const Card = withStyles(theme => ({
     }
 }))(MuiCard)
 
-const ListSecondaryAction = withStyles(theme => ({
+const SmallGrid = withStyles(theme => ({
     root: {
-        top: '70%',
-        right: '5px'
+        height: '26px',
+        position: 'relative'
     }
-}))(MuiListSecondaryAction)
-
-const ListItem = withStyles(theme => ({
-    root: {
-        paddingTop: 0,
-        paddingBottom: 0,
-        paddingLeft: '2px'
-    }
-}))(MuiListItem)
-
+}))(Grid)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////                                            REACT COMPONENTS                                                   /////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //SmallAgentListing component
-const SmallAgentListing = ({ agent }) => 
-    
+const SmallAgentListing = ({ agent, showAvatarOnly }) => {
+    if(showAvatarOnly) return (
+        <MuiAvatar>
+            {agent.name[0]}
+        </MuiAvatar>
+    )
+
+    return(
         <Card variant="outlined">
-            <Grid style={{ position: 'relative' }} item container xs={6}>
+            <SmallGrid item alignItems="center" container>
                 <Avatar size='small' backgroundColor={agent.color}>
                     {agent.name[0]}
                 </Avatar>
-                <Grid>
-                    <Typography variant="body1"><strong>{agent.name}</strong></Typography>
+                <Grid style={{ marginLeft: '15%' }} item>
+                    <Typography variant="subtitle1"><strong>{agent.name}</strong></Typography>
                 </Grid>
-            </Grid>
+            </SmallGrid>
         </Card>
-    
+    )
+}
 
 //MediumAgentListing component
 const MediumAgentListing = ({ agent }) => 
@@ -71,7 +67,7 @@ const MediumAgentListing = ({ agent }) =>
                 <Avatar backgroundColor={agent.color} badgeContent='TA'>
                     {agent.name[0]}
                 </Avatar>
-                <Typography>
+                <Typography variant="subtitle1">
                     <strong>{agent.name}</strong>
                     <br />
                     {agent.code}
@@ -88,16 +84,17 @@ const MediumAgentListing = ({ agent }) =>
         </Grid>
 
 //AgentListing component
-const AgentListing = ({ agent, size }) => {
+const AgentListing = ({ agent, size, showAvatarOnly }) => {
 
-    if(size === 'small') return <SmallAgentListing agent={agent} />
+    if(size === 'small') return <SmallAgentListing showAvatarOnly={showAvatarOnly} agent={agent} />
 
     return <MediumAgentListing agent={agent} />
 }
 
 AgentListing.propTypes = {
     size: PropTypes.string,
-    agent: PropTypes.object.isRequired
+    agent: PropTypes.object.isRequired,
+    showAvatarOnly: PropTypes.bool
 }
 
 export default AgentListing

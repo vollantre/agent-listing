@@ -19,6 +19,18 @@ export default [
                 color: deepPurple[500]
             }
         ]
+    }, 
+    {
+        appt_time: "2020-04-01 09:30:00",
+        agents: [
+            {
+                name: 'Shawna Blankenship',
+                code: '32FFR',
+                phone: '(286) 934 3515',
+                email: 'blankenship@example.com',
+                color: deepPurple[900]
+            }
+        ]
     }
     
 ]
