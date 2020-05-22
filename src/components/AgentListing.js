@@ -1,52 +1,58 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import MuiCard from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
 import Phone from '@material-ui/icons/Phone'
 import Email from '@material-ui/icons/Email'
-import MuiAvatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
+import Slide from '@material-ui/core/Slide'
 import Avatar from './Avatar'
 
 //STYLING
-const Card = withStyles(theme => ({
-    root: {
-        overflow: 'unset'
-    }
-}))(MuiCard)
-
 const SmallGrid = withStyles(theme => ({
     root: {
-        height: '26px',
-        position: 'relative'
+        border: '1px solid rgba(0, 0, 0, 0.12)', 
+        paddingLeft: '28px', borderRadius: '4px', 
+        width: '100%',
     }
 }))(Grid)
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////                                            REACT COMPONENTS                                                   /////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 //SmallAgentListing component
 const SmallAgentListing = ({ agent, showAvatarOnly }) => {
-    if(showAvatarOnly) return (
-        <MuiAvatar>
-            {agent.name[0]}
-        </MuiAvatar>
-    )
+    const [showName, setShowName] = React.useState(!showAvatarOnly || false)
 
     return(
-        <Card variant="outlined">
-            <SmallGrid item alignItems="center" container>
-                <Avatar size='small' backgroundColor={agent.color}>
-                    {agent.name[0]}
-                </Avatar>
-                <Grid style={{ marginLeft: '15%' }} item>
-                    <Typography variant="subtitle1"><strong>{agent.name}</strong></Typography>
-                </Grid>
-            </SmallGrid>
-        </Card>
+        <Grid 
+            style={{ position: 'relative' }} 
+            item 
+            alignItems="center" 
+            container
+            onMouseOver={() => setShowName(true)}
+            onMouseOut={() => setShowName(!showAvatarOnly)}
+        >
+            <Avatar size='small' backgroundColor={agent.color}>
+                {agent.name[0]}
+            </Avatar>
+            <Slide
+                mountOnEnter
+                unmountOnExit
+                in={showName}
+                direction="right"
+            >
+                <SmallGrid item>
+                    <Typography variant="subtitle1">
+                        <strong>{agent.name}</strong>
+                    </Typography>
+                </SmallGrid>
+            </Slide>
+        </Grid>
     )
 }
 

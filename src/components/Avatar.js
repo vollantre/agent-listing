@@ -29,10 +29,10 @@ const styles = theme => ({
         width: '28px',
         height: '28px',
         position: 'absolute',
-        marginLeft: '-9px',
+        marginLeft: '-7px',
         border: '2px solid white',
         borderRadius: '50%',
-        top: '-2px'
+        top: '-1px'
     },
     large: {
         width: theme.spacing(6),
@@ -46,9 +46,9 @@ const Avatar = (props) =>  {
     const { children, backgroundColor, classes, badgeContent, size } = props
 
     if(size && size === 'small') return (
-            <MuiAvatar style={{ backgroundColor }} className={classes.small}>
-                {children}
-            </MuiAvatar>
+        <MuiAvatar style={{ backgroundColor }} className={classes.small}>
+            {children}
+        </MuiAvatar>
     ) 
 
     return (
