@@ -30,14 +30,27 @@ const Appointment = ({appointment, xs}) => {
     const [mTop] = React.useState(Math.floor(getMinutes(parseISO(appointment.appt_time)) / 15 % 4) * 7)
 
     if (appointment.agents.length > 1) return (
-        <Grid style={{ marginTop: `${mTop}px`, display: 'flex' }} item xs={xs}>
-            {appointment.agents.map(agent => <AgentListing size="small" key={agent.code} agent={agent} showAvatarOnly />)}
+        <Grid id="appointment" style={{ marginTop: `${mTop}px`, position: 'relative' }} container item xs={xs}>
+            {appointment.agents.map((agent, i) => 
+            <Grid 
+                style={{ position: 'absolute', left: `${i * 20}px` }} 
+                item
+                key={agent.code}
+            >
+                <AgentListing 
+                    size="small"
+                    agent={agent} 
+                    showAvatarOnly
+                />
+            </Grid>
+                
+            )}
         </Grid>
     )
 
     return(
         <Grid style={{ marginTop: `${mTop}px` }} item xs={xs}>
-            <AgentListing size="small" showAvatarOnly agent={appointment.agents[0]} />
+            <AgentListing size="small" agent={appointment.agents[0]} />
         </Grid>
     )
 }

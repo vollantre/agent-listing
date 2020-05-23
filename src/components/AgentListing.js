@@ -15,6 +15,8 @@ const SmallGrid = withStyles(theme => ({
         border: '1px solid rgba(0, 0, 0, 0.12)', 
         paddingLeft: '28px', borderRadius: '4px', 
         width: '100%',
+        minWidth: '175px',
+        backgroundColor: 'white'
     }
 }))(Grid)
 
@@ -30,7 +32,7 @@ const SmallAgentListing = ({ agent, showAvatarOnly }) => {
 
     return(
         <Grid 
-            style={{ position: 'relative' }} 
+            style={{ position: 'relative', zIndex: (showName ? 2 : 0) }} 
             item 
             alignItems="center" 
             container
