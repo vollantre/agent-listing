@@ -3,22 +3,7 @@ import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/
 import Typography from '@material-ui/core/Typography'
 import DailyAgenda from './components/DailyAgenda'
 import AgentListing from './components/AgentListing'
-import Avatar from '@material-ui/core/Avatar'
-import AvatarGroup from '@material-ui/lab/AvatarGroup'
 import sample from './sample'
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-    },
-    small: {
-        //width: '100%',
-        maxWidth: 200,
-        //backgroundColor: theme.palette.background.paper
-    }
-}))
 
 const theme = createMuiTheme({
     typography: {
@@ -59,17 +44,6 @@ const App = () => {
                 agent={mockArray[0].agents[0]}
                 size="medium"
             />
-            <Typography variant="h5">
-                Avatar Group
-            </Typography>
-            <AvatarGroup max={3}>
-                <Avatar>
-                    X
-                </Avatar>
-                <Avatar>
-                    D
-                </Avatar>
-            </AvatarGroup>
         </MuiThemeProvider>
     )
 }
