@@ -30,6 +30,8 @@ const SmallGrid = withStyles(theme => ({
 const SmallAgentListing = ({ agent, showAvatarOnly }) => {
     const [showName, setShowName] = React.useState(!showAvatarOnly || false)
 
+    const showNameWhenTrue = { display: showName ? '' : 'none' }
+
     return(
         <Grid 
             style={{ position: 'relative', zIndex: (showName ? 2 : 0) }} 
@@ -42,24 +44,35 @@ const SmallAgentListing = ({ agent, showAvatarOnly }) => {
             <Avatar size='small' backgroundColor={agent.color}>
                 {agent.name[0]}
             </Avatar>
-            <Slide
-                mountOnEnter
-                unmountOnExit
-                in={showName}
-                direction="right"
-            >
+            <div style={showNameWhenTrue}>
                 <SmallGrid item>
                     <Typography variant="subtitle1">
                         <strong>{agent.name}</strong>
                     </Typography>
                 </SmallGrid>
-            </Slide>
+            </div>
         </Grid>
     )
 }
 
 //MediumAgentListing component
-const MediumAgentListing = ({ agent }) => 
+const MediumAgentListing = ({ agent }) => {
+    const [showPhone, setShowPhone] = React.useState(false)
+    const [showEmail, setShowEmail] = React.useState(false)
+
+    const showWhenVisible = (visible) => ({ display: visible ? '' : 'none' })
+
+    const handlePhoneOnClick = () => {
+        showEmail && setShowEmail(false)
+        setShowPhone(!showPhone)
+    }
+
+    const handleEmailOnClick = () => {
+        showPhone && setShowPhone(false)
+        setShowEmail(!showEmail)
+    }
+
+    return(
         <Grid 
             style={
                 { 
@@ -81,15 +94,24 @@ const MediumAgentListing = ({ agent }) =>
                     {agent.code}
                 </Typography>
             </Grid>
-            <Grid item xs={6} container alignItems="flex-end" justify="flex-end">
-                <IconButton size="small">
+            <Grid style={{ flexWrap: 'nowrap' }} item xs={6} container alignItems="flex-end" justify="flex-end">
+                <IconButton onClick={handlePhoneOnClick} size="small">
                     <Phone />
+                    <Typography style={showWhenVisible(showPhone)} variant="body1">
+                        {agent.phone}
+                    </Typography>
                 </IconButton>
-                <IconButton size="small">
+                <IconButton onClick={handleEmailOnClick} size="small">
                     <Email />
+                    <Typography style={showWhenVisible(showEmail)} variant="body1">
+                        {agent.email}
+                    </Typography>
                 </IconButton>
             </Grid>
         </Grid>
+    )
+}
+        
 
 //AgentListing component
 const AgentListing = ({ agent, size, showAvatarOnly }) => {
