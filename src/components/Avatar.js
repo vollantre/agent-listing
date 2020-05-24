@@ -30,7 +30,6 @@ const styles = theme => ({
         height: '28px',
         position: 'absolute',
         marginLeft: '-7px',
-        border: '2px solid white',
         borderRadius: '50%',
         top: '-1px'
     },
@@ -43,10 +42,13 @@ const styles = theme => ({
 })
 
 const Avatar = (props) =>  {
-    const { children, backgroundColor, classes, badgeContent, size } = props
+    const { children, backgroundColor, isHighlightened, classes, badgeContent, size } = props
 
     if(size && size === 'small') return (
-        <MuiAvatar style={{ backgroundColor }} className={classes.small}>
+        <MuiAvatar 
+            style={{ backgroundColor, border: `2px solid ${isHighlightened ? 'red' : 'white'}` }} 
+            className={classes.small}
+        >
             {children}
         </MuiAvatar>
     ) 
@@ -73,7 +75,8 @@ Avatar.propTypes = {
     children: PropTypes.node,
     backGroundColor: PropTypes.string,
     badgeContent: PropTypes.string,
-    size: PropTypes.string
+    size: PropTypes.string,
+    highlightened: PropTypes.bool
 }
 
 export default withStyles(styles)(Avatar)

@@ -33,7 +33,8 @@ const App = () => {
             <Typography variant="h5">
                 Daily Agenda
             </Typography>
-            <DailyAgenda 
+            <DailyAgenda
+                highlightenedAgent={3} 
                 title="Team Agenda"
                 appointments={mockArray}
             />

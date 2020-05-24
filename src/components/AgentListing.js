@@ -27,7 +27,7 @@ const SmallGrid = withStyles(theme => ({
 
 
 //SmallAgentListing component
-const SmallAgentListing = ({ agent, showAvatarOnly }) => {
+const SmallAgentListing = ({ agent, showAvatarOnly, highlightenedAgent }) => {
     const [showName, setShowName] = React.useState(!showAvatarOnly || false)
 
     const showNameWhenTrue = { display: showName ? '' : 'none' }
@@ -41,16 +41,18 @@ const SmallAgentListing = ({ agent, showAvatarOnly }) => {
             onMouseOver={() => setShowName(true)}
             onMouseOut={() => setShowName(!showAvatarOnly)}
         >
-            <Avatar size='small' backgroundColor={agent.color}>
+            <Avatar 
+                size='small' 
+                backgroundColor={agent.color}
+                isHighlightened={agent._id === highlightenedAgent}
+            >
                 {agent.name[0]}
             </Avatar>
-            <div style={showNameWhenTrue}>
-                <SmallGrid item>
+                <SmallGrid style={showNameWhenTrue} item>
                     <Typography variant="subtitle1">
                         <strong>{agent.name}</strong>
                     </Typography>
                 </SmallGrid>
-            </div>
         </Grid>
     )
 }
@@ -114,9 +116,13 @@ const MediumAgentListing = ({ agent }) => {
         
 
 //AgentListing component
-const AgentListing = ({ agent, size, showAvatarOnly }) => {
+const AgentListing = ({ agent, size, showAvatarOnly, highlightenedAgent }) => {
 
-    if(size === 'small') return <SmallAgentListing showAvatarOnly={showAvatarOnly} agent={agent} />
+    if(size === 'small') return <SmallAgentListing 
+                                    showAvatarOnly={showAvatarOnly} 
+                                    agent={agent}
+                                    highlightenedAgent={highlightenedAgent}
+                                    />
 
     return <MediumAgentListing agent={agent} />
 }
@@ -124,7 +130,8 @@ const AgentListing = ({ agent, size, showAvatarOnly }) => {
 AgentListing.propTypes = {
     size: PropTypes.string,
     agent: PropTypes.object.isRequired,
-    showAvatarOnly: PropTypes.bool
+    showAvatarOnly: PropTypes.bool,
+    highlightenedAgent: PropTypes.number
 }
 
 export default AgentListing

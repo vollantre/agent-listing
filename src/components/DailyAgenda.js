@@ -26,7 +26,7 @@ const Paper = withStyles(theme => ({
 
 
 //Appointment
-const Appointment = ({appointment, xs}) => {
+const Appointment = ({appointment, xs, highlightenedAgent}) => {
     const [mTop] = React.useState(Math.floor(getMinutes(parseISO(appointment.appt_time)) / 15 % 4) * 7)
 
     if (appointment.agents.length > 1) return (
@@ -37,7 +37,8 @@ const Appointment = ({appointment, xs}) => {
                 item
                 key={agent.code}
             >
-                <AgentListing 
+                <AgentListing
+                    highlightenedAgent={highlightenedAgent} 
                     size="small"
                     agent={agent} 
                     showAvatarOnly
@@ -50,7 +51,11 @@ const Appointment = ({appointment, xs}) => {
 
     return(
         <Grid style={{ marginTop: `${mTop}px` }} item xs={xs}>
-            <AgentListing size="small" agent={appointment.agents[0]} />
+            <AgentListing 
+                size="small" 
+                agent={appointment.agents[0]} 
+                highlightenedAgent={highlightenedAgent} 
+            />
         </Grid>
     )
 }
@@ -66,7 +71,7 @@ const initSpots = () => {
     return ret
 }
 
-const Spots = ({ appointments }) => {
+const Spots = ({ appointments, highlightenedAgent }) => {
     const spots = initSpots()
     appointments.forEach(appt => spots[getHours(parseISO(appt.appt_time)) - 7].appointments.push(appt))
 
@@ -74,7 +79,12 @@ const Spots = ({ appointments }) => {
         <React.Fragment>
             {spots.map(spot => 
                 <HourSpot key={spot.hour}>
-                    {spot.appointments.map((appt, i) => <Appointment key={i} appointment={appt} />)}
+                    {spot.appointments.map((appt, i) => 
+                    <Appointment
+                        highlightenedAgent={highlightenedAgent} 
+                        key={i} 
+                        appointment={appt} 
+                    />)}
                 </HourSpot>)
             }
         </React.Fragment>
@@ -82,16 +92,28 @@ const Spots = ({ appointments }) => {
 }
             
 //DailyAgenda Component
-const DailyAgenda = ({ title, appointments }) => {
+const DailyAgenda = ({ title, appointments, highlightenedAgent }) => {
     return(
         <Paper elevation={3}>
             <Typography align="center" variant="h4">
                 {title}
             </Typography>
-            <Grid style={{ marginTop: '20px', width: '101%' }} container spacing={2}>
+            <Grid 
+                style={{ marginTop: '20px', width: '101%' }} 
+                container 
+                spacing={2}
+            >
                 <Hours />
-                <Grid direction="column" container item xs={9}>
-                    <Spots appointments={appointments} />
+                <Grid 
+                    direction="column" 
+                    container 
+                    item 
+                    xs={9}
+                >
+                    <Spots 
+                        highlightenedAgent={highlightenedAgent} 
+                        appointments={appointments} 
+                    />
                 </Grid>
             </Grid>
         </Paper>
@@ -101,7 +123,8 @@ const DailyAgenda = ({ title, appointments }) => {
 
 DailyAgenda.propTypes = {
     title: PropTypes.string.isRequired,
-    appointments: PropTypes.array
+    appointments: PropTypes.array,
+    highlightenedAgent: PropTypes.number
 }
 
 export default DailyAgenda
