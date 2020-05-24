@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { HourGrid } from './StyledComponents'
@@ -8,7 +7,7 @@ import { HourGrid } from './StyledComponents'
 export const HourSpot = ({ children }) => (
     <HourGrid style={{ position: 'relative' }} item container>
         <Grid style={{ position: 'absolute' }} container item>
-            {children.map(child => React.cloneElement(child, { xs: children.length > 1 ? (12 / children.length) : 8 }))}
+            {children.map(child => React.cloneElement(child, { xs: children.length > 1 ? Math.floor(12 / children.length) : 8 }))}
         </Grid>
     </HourGrid>
 )

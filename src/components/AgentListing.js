@@ -6,7 +6,6 @@ import IconButton from '@material-ui/core/IconButton'
 import Phone from '@material-ui/icons/Phone'
 import Email from '@material-ui/icons/Email'
 import Typography from '@material-ui/core/Typography'
-import Slide from '@material-ui/core/Slide'
 import Avatar from './Avatar'
 
 //STYLING
@@ -27,8 +26,8 @@ const SmallGrid = withStyles(theme => ({
 
 
 //SmallAgentListing component
-const SmallAgentListing = ({ agent, showAvatarOnly, highlightenedAgent }) => {
-    const [showName, setShowName] = React.useState(!showAvatarOnly || false)
+const SmallAgentListing = ({ agent, highlightenedAgent }) => {
+    const [showName, setShowName] = React.useState(false)
 
     const showNameWhenTrue = { display: showName ? '' : 'none' }
 
@@ -39,7 +38,7 @@ const SmallAgentListing = ({ agent, showAvatarOnly, highlightenedAgent }) => {
             alignItems="center" 
             container
             onMouseOver={() => setShowName(true)}
-            onMouseOut={() => setShowName(!showAvatarOnly)}
+            onMouseOut={() => setShowName(false)}
         >
             <Avatar 
                 size='small' 

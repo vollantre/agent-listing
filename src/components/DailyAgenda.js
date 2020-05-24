@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import MuiPaper from '@material-ui/core/Paper'
-import AvatarGroup from '@material-ui/lab/AvatarGroup'
-import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import AgentListing from './AgentListing'
@@ -75,11 +73,13 @@ const Spots = ({ appointments, highlightenedAgent }) => {
     const spots = initSpots()
     appointments.forEach(appt => spots[getHours(parseISO(appt.appt_time)) - 7].appointments.push(appt))
 
+    const sortByMinutes = (a, b) => getMinutes(parseISO(a.appt_time)) - getMinutes(parseISO(b.appt_time))
+
     return(
         <React.Fragment>
             {spots.map(spot => 
                 <HourSpot key={spot.hour}>
-                    {spot.appointments.map((appt, i) => 
+                    {spot.appointments.sort(sortByMinutes).map((appt, i) => 
                     <Appointment
                         highlightenedAgent={highlightenedAgent} 
                         key={i} 
