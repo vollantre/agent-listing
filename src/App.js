@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles'
+import { MuiThemeProvider, createMuiTheme, } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import DailyAgenda from './components/DailyAgenda'
 import AgentListing from './components/AgentListing'
+import AppointmentDetail from './components/AppointmentDetail'
 import sample from './sample'
 
 const theme = createMuiTheme({
@@ -30,6 +31,12 @@ const App = () => {
     
     return(
         <MuiThemeProvider theme={theme}>
+            <Typography variant="h5">
+                Appointment Detail
+            </Typography>
+            <AppointmentDetail 
+                appointment={mockArray[1]}
+            />
             <Typography variant="h5">
                 Daily Agenda
             </Typography>

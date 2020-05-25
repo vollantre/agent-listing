@@ -10,7 +10,7 @@ import Spots from './Spots'
 //STYLING
 const Paper = withStyles(theme => ({
     root: {
-        width: theme.spacing(60)
+        width: theme.spacing(65)
     }
 }))(MuiPaper)
 

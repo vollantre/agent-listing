@@ -81,6 +81,7 @@ const MediumAgentListing = ({ agent }) => {
                 { 
                     width: '350px',
                     padding: '5px',
+                    backgroundColor: 'white',
                     borderRadius: '4px',
                     border: '1px solid rgba(0, 0, 0, 0.12)'
                 }
