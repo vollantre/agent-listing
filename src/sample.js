@@ -3,6 +3,8 @@ import { deepOrange, deepPurple } from '@material-ui/core/colors'
 export default [
     {
         appt_time: "2020-04-01 09:00:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 1,
@@ -24,6 +26,8 @@ export default [
     },
     {
         appt_time: "2020-04-01 09:30:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 1,
@@ -45,6 +49,8 @@ export default [
     },
     {
         appt_time: "2020-04-01 09:30:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 4,
@@ -58,6 +64,8 @@ export default [
     },
     {
         appt_time: "2020-04-01 09:30:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 2,
@@ -71,6 +79,8 @@ export default [
     },
     {
         appt_time: "2020-04-01 10:00:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 2,
@@ -84,6 +94,8 @@ export default [
     },
     {
         appt_time: "2020-04-01 09:00:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 2,
@@ -97,6 +109,8 @@ export default [
     },
     {
         appt_time: "2020-04-01 09:30:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 1,
@@ -118,6 +132,8 @@ export default [
     },
     {
         appt_time: "2020-04-01 09:00:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 1,
@@ -139,6 +155,8 @@ export default [
     },
     {
         appt_time: "2020-04-01 09:30:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 4,
@@ -152,6 +170,8 @@ export default [
     },
     {
         appt_time: "2020-04-01 09:30:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 2,
@@ -165,6 +185,8 @@ export default [
     },
     {
         appt_time: "2020-04-01 09:00:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 2,
@@ -178,6 +200,8 @@ export default [
     },
     {
         appt_time: "2020-04-01 09:45:00",
+        client: 'sample client',
+        location: 'sample location',
         agents: [
             {
                 _id: 2,

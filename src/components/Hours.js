@@ -3,14 +3,6 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { HourGrid } from './StyledComponents'
 
-//HourSpot
-export const HourSpot = ({ children }) => (
-    <HourGrid style={{ position: 'relative' }} item container>
-        <Grid style={{ position: 'absolute' }} container item>
-            {children.map(child => React.cloneElement(child, { xs: children.length > 1 ? Math.floor(12 / children.length) : 8 }))}
-        </Grid>
-    </HourGrid>
-)
 
 //Hour component
 const Hour = ({ hour }) => (

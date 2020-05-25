@@ -58,19 +58,21 @@ const SmallAgentListing = ({ agent, highlightenedAgent }) => {
 
 //MediumAgentListing component
 const MediumAgentListing = ({ agent }) => {
-    const [showPhone, setShowPhone] = React.useState(false)
-    const [showEmail, setShowEmail] = React.useState(false)
+    const [showPhoneInfo, setShowPhoneInfo] = React.useState(false)
+    const [showEmailInfo, setShowEmailInfo] = React.useState(false)
+    const [showPhoneButton] = React.useState(agent.phone !== undefined && agent.phone.length > 0)
+    const [showEmailButton] = React.useState(agent.email !== undefined && agent.email.length > 0)
 
     const showWhenVisible = (visible) => ({ display: visible ? '' : 'none' })
 
-    const handlePhoneOnClick = () => {
-        showEmail && setShowEmail(false)
-        setShowPhone(!showPhone)
+    const handlePhoneInfoOnClick = () => {
+        showEmailInfo && setShowEmailInfo(false)
+        setShowPhoneInfo(!showPhoneInfo)
     }
 
-    const handleEmailOnClick = () => {
-        showPhone && setShowPhone(false)
-        setShowEmail(!showEmail)
+    const handleEmailInfoOnClick = () => {
+        showPhoneInfo && setShowPhoneInfo(false)
+        setShowEmailInfo(!showEmailInfo)
     }
 
     return(
@@ -86,7 +88,10 @@ const MediumAgentListing = ({ agent }) => {
             container
         >
             <Grid item container xs={6}>
-                <Avatar backgroundColor={agent.color} badgeContent='TA'>
+                <Avatar 
+                    backgroundColor={agent.color} 
+                    badgeContent='TA'
+                >
                     {agent.name[0]}
                 </Avatar>
                 <Typography variant="subtitle1">
@@ -95,16 +100,37 @@ const MediumAgentListing = ({ agent }) => {
                     {agent.code}
                 </Typography>
             </Grid>
-            <Grid style={{ flexWrap: 'nowrap' }} item xs={6} container alignItems="flex-end" justify="flex-end">
-                <IconButton onClick={handlePhoneOnClick} size="small">
+            <Grid 
+                style={{ flexWrap: 'nowrap' }} 
+                item
+                xs={6} 
+                container 
+                alignItems="flex-end" 
+                justify="flex-end"
+            >
+                <IconButton 
+                    style={showWhenVisible(showPhoneButton)} 
+                    onClick={handlePhoneInfoOnClick} 
+                    size="small"
+                >
                     <Phone />
-                    <Typography style={showWhenVisible(showPhone)} variant="body1">
+                    <Typography 
+                        style={showWhenVisible(showPhoneInfo)} 
+                        variant="body1"
+                    >
                         {agent.phone}
                     </Typography>
                 </IconButton>
-                <IconButton onClick={handleEmailOnClick} size="small">
+                <IconButton 
+                    style={showWhenVisible(showEmailButton)}
+                    onClick={handleEmailInfoOnClick} 
+                    size="small"
+                >
                     <Email />
-                    <Typography style={showWhenVisible(showEmail)} variant="body1">
+                    <Typography 
+                        style={showWhenVisible(showEmailInfo)} 
+                        variant="body1"
+                    >
                         {agent.email}
                     </Typography>
                 </IconButton>

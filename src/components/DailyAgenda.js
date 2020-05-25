@@ -4,11 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import MuiPaper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
-import AgentListing from './AgentListing'
-import Hours, { HourSpot } from './Hours'
-import getHours from 'date-fns/getHours'
-import getMinutes from 'date-fns/getMinutes'
-import parseISO from 'date-fns/parseISO'
+import Hours from './Hours'
+import Spots from './Spots'
 
 //STYLING
 const Paper = withStyles(theme => ({
@@ -22,74 +19,6 @@ const Paper = withStyles(theme => ({
 /////                                            REACT COMPONENTS                                                   /////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-//Appointment
-const Appointment = ({appointment, xs, highlightenedAgent}) => {
-    const [mTop] = React.useState(Math.floor(getMinutes(parseISO(appointment.appt_time)) / 15 % 4) * 7)
-
-    if (appointment.agents.length > 1) return (
-        <Grid id="appointment" style={{ marginTop: `${mTop}px`, position: 'relative' }} container item xs={xs}>
-            {appointment.agents.map((agent, i) => 
-            <Grid 
-                style={{ position: 'absolute', left: `${i * 20}px` }} 
-                item
-                key={agent.code}
-            >
-                <AgentListing
-                    highlightenedAgent={highlightenedAgent} 
-                    size="small"
-                    agent={agent} 
-                    showAvatarOnly
-                />
-            </Grid>
-                
-            )}
-        </Grid>
-    )
-
-    return(
-        <Grid style={{ marginTop: `${mTop}px` }} item xs={xs}>
-            <AgentListing 
-                size="small" 
-                agent={appointment.agents[0]} 
-                highlightenedAgent={highlightenedAgent} 
-            />
-        </Grid>
-    )
-}
-
-const initSpots = () => {
-    const ret = []
-    for(var i = 0; i < 14; i++){
-        ret[i] = {
-            appointments: [],
-            hour: i + 7
-        }
-    }
-    return ret
-}
-
-const Spots = ({ appointments, highlightenedAgent }) => {
-    const spots = initSpots()
-    appointments.forEach(appt => spots[getHours(parseISO(appt.appt_time)) - 7].appointments.push(appt))
-
-    const sortByMinutes = (a, b) => getMinutes(parseISO(a.appt_time)) - getMinutes(parseISO(b.appt_time))
-
-    return(
-        <React.Fragment>
-            {spots.map(spot => 
-                <HourSpot key={spot.hour}>
-                    {spot.appointments.sort(sortByMinutes).map((appt, i) => 
-                    <Appointment
-                        highlightenedAgent={highlightenedAgent} 
-                        key={i} 
-                        appointment={appt} 
-                    />)}
-                </HourSpot>)
-            }
-        </React.Fragment>
-    )
-}
             
 //DailyAgenda Component
 const DailyAgenda = ({ title, appointments, highlightenedAgent }) => {
