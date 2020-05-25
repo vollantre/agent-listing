@@ -1,15 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import MuiPopover from '@material-ui/core/Popover'
 import Grid from '@material-ui/core/Grid'
 import getMinutes from 'date-fns/getMinutes'
 import parseISO from 'date-fns/parseISO'
 import AgentListing from './AgentListing'
+import AppointmentDetail from './AppointmentDetail'
+
+const Popover = withStyles(theme => ({
+    paper: {
+        overflow: 'inherit'
+    }
+}))(MuiPopover)
 
 //Appointment
 const Appointment = ({appointment, xs, highlightenedAgent}) => {
     const [mTop] = React.useState(Math.floor(getMinutes(parseISO(appointment.appt_time)) / 15 % 4) * 7)
+    const [anchorEl, setAnchorEl] = React.useState(null)
 
-    if (appointment.agents.length > 1) return (
+    const handleClick = (e) => setAnchorEl(e.currentTarget)
+
+    return (
         <Grid 
             style={{ marginTop: `${mTop}px`, position: 'relative' }} 
             container 
@@ -26,20 +38,25 @@ const Appointment = ({appointment, xs, highlightenedAgent}) => {
                     highlightenedAgent={highlightenedAgent} 
                     size="small"
                     agent={agent}
+                    handleClick={handleClick}
                 />
             </Grid>
-                
             )}
-        </Grid>
-    )
-
-    return(
-        <Grid style={{ marginTop: `${mTop}px` }} item xs={xs}>
-            <AgentListing 
-                size="small" 
-                agent={appointment.agents[0]} 
-                highlightenedAgent={highlightenedAgent} 
-            />
+            <Popover
+                open={Boolean(anchorEl)}
+                anchorEl={anchorEl}
+                onClose={() => setAnchorEl(null)}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+            >
+                <AppointmentDetail appointment={appointment} />
+            </Popover>
         </Grid>
     )
 }

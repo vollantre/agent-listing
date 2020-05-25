@@ -37,11 +37,13 @@ const Spots = ({ appointments, highlightenedAgent }) => {
             {spots.map(spot => 
                 <HourSpot key={spot.hour}>
                     {spot.appointments.sort(sortByMinutes).map((appt, i) => 
-                    <Appointment
-                        highlightenedAgent={highlightenedAgent} 
-                        key={i} 
-                        appointment={appt} 
-                    />)}
+                        <Appointment
+                            highlightenedAgent={highlightenedAgent} 
+                            key={i} 
+                            appointment={appt}
+                            xs={0}
+                        />)
+                    }
                 </HourSpot>)
             }
         </React.Fragment>

@@ -26,7 +26,7 @@ const SmallGrid = withStyles(theme => ({
 
 
 //SmallAgentListing component
-const SmallAgentListing = ({ agent, highlightenedAgent }) => {
+const SmallAgentListing = ({ agent, highlightenedAgent, handleClick }) => {
     const [showName, setShowName] = React.useState(false)
 
     const showNameWhenTrue = { display: showName ? '' : 'none' }
@@ -37,6 +37,7 @@ const SmallAgentListing = ({ agent, highlightenedAgent }) => {
             item 
             alignItems="center" 
             container
+            onClick={handleClick}
             onMouseOver={() => setShowName(true)}
             onMouseOut={() => setShowName(false)}
         >
@@ -142,11 +143,12 @@ const MediumAgentListing = ({ agent }) => {
         
 
 //AgentListing component
-const AgentListing = ({ agent, size, highlightenedAgent }) => {
+const AgentListing = ({ agent, size, highlightenedAgent, handleClick }) => {
 
     if(size === 'small') return <SmallAgentListing 
                                     agent={agent}
                                     highlightenedAgent={highlightenedAgent}
+                                    handleClick={handleClick}
                                     />
 
     return <MediumAgentListing agent={agent} />
