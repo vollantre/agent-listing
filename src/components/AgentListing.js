@@ -141,10 +141,9 @@ const MediumAgentListing = ({ agent }) => {
         
 
 //AgentListing component
-const AgentListing = ({ agent, size, showAvatarOnly, highlightenedAgent }) => {
+const AgentListing = ({ agent, size, highlightenedAgent }) => {
 
     if(size === 'small') return <SmallAgentListing 
-                                    showAvatarOnly={showAvatarOnly} 
                                     agent={agent}
                                     highlightenedAgent={highlightenedAgent}
                                     />

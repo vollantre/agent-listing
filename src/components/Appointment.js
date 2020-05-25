@@ -25,8 +25,7 @@ const Appointment = ({appointment, xs, highlightenedAgent}) => {
                 <AgentListing
                     highlightenedAgent={highlightenedAgent} 
                     size="small"
-                    agent={agent} 
-                    showAvatarOnly
+                    agent={agent}
                 />
             </Grid>
                 
